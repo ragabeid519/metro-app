@@ -34,6 +34,13 @@ Most metro apps require you to know your starting station. This app changes that
 ## 📸 Screenshots & Demo
 
 | Smart Proximity | Route Planning | Ticket Details |
+
+
+
+
+https://github.com/user-attachments/assets/f50776c3-2fc1-4e50-b754-77f3b19f9199
+
+
 | :---: | :---: | :---: |
 | ![Proximity UI](https://via.placeholder.com/200x400?text=Nearest+Station) | ![Search](https://via.placeholder.com/200x400?text=Smart+Route) | ![Fare](https://via.placeholder.com/200x400?text=Ticket+Price) |
 
