@@ -8,6 +8,7 @@ import '../services/metro_service.dart';
 class HomeController extends GetxController {
   final startStationController = TextEditingController();
   final endStationController = TextEditingController();
+  final arrivalController = TextEditingController();
 
   // المتغيرات التفاعلية
   final RxList<MetroRoute> routes = <MetroRoute>[].obs;

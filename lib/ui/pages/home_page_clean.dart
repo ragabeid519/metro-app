@@ -181,10 +181,66 @@ class HomePage extends StatelessWidget {
               },
               child: Text("nearest start station"),
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: homeController.arrivalController,
+                    decoration: InputDecoration(labelText: 'enter place'),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _getNearestArrival();
+                  },
+                  child: Text("nearest station to place"),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
+  }
+
+  _getNearestArrival() async {
+    String place = homeController.arrivalController.text;
+    try {
+      List<Location> locations = await locationFromAddress(place);
+      print('locations: $locations =============================');
+      if (locations.isEmpty) {
+        print('No locations found for the given place.');
+        return;
+      }
+      print('Locations found: ${locations.first}');
+      Location location = locations.first;
+      print('Location of $place: ${location.latitude}, ${location.longitude}');
+
+      double minDistance = double.infinity;
+      MetroStation? nearestStation;
+      for (var station in MetroConstants.cairoMetroStations) {
+        double distance = Geolocator.distanceBetween(
+          location.latitude,
+          location.longitude,
+          station.lat,
+          station.lng,
+        );
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestStation = station;
+        }
+      }
+      homeController.endStationController.text = nearestStation!.name;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to fetch location for the place.',
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+      );
+      print('Error occurred while fetching location: $e');
+      return;
+    }
   }
 
   _getNearestStation() async {
