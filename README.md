@@ -31,6 +31,22 @@ Most metro apps require you to know your starting station. This app changes that
 
 ---
 
+### 🧠 Technical Deep Dive
+
+#### 🛰️ Geolocation & Proximity
+The app utilizes the **Haversine Formula** to calculate the shortest distance across the earth's surface. By comparing the user's live `Position` with our `MetroStation` database, the system identifies the nearest station with high precision (Location Accuracy: High).
+
+#### 🏗️ Architecture (GetX Pattern)
+We followed a strict **Controller-Service-Model** pattern:
+- **Models:** Defines the structure of `MetroRoute` and `MetroStation`.
+- **Services:** Pure Dart logic for distance and fare calculations (Unit Testable).
+- **Controllers:** Manages the UI state and reacts to user location changes.
+
+#### 🧮 Routing Algorithm
+The pathfinding logic is designed to handle:
+1. **Linear Routes:** Direct trips on the same line.
+2. **Transfer Logic:** Identifying the optimal switching point (Sadat, Shohadaa, Nasser, Ataba) for multi-line trips.
+
 ## 📸 Screenshots & Demo
 
 | Smart Proximity | Route Planning | Ticket Details |
